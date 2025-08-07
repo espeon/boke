@@ -238,6 +238,8 @@ const BlueskyReply = ({
             </div>
             <a
               href={`https://bsky.app/profile/${author.did}/post/${post.uri.split("/").pop()}`}
+              target="_blank"
+              rel="noopener noreferrer"
               className="flex items-center gap-2"
             >
               Go to post
