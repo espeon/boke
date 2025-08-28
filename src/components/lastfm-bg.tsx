@@ -60,8 +60,8 @@ export function LastFmBackground({
   ]);
 
   // if we're on / set var to 0.25, else 0.75
-  let opacity = 0.75;
-  if (new URL(window.location.href).pathname === "/") opacity = 0.25;
+  let opacity = 0.99;
+  if (new URL(window.location.href).pathname === "/") opacity = 0.5;
 
   return (
     <>
@@ -75,13 +75,19 @@ export function LastFmBackground({
             transition: skipFadeIn ? "none" : "opacity 0.6s ease-in-out",
           }}
         >
-          <MeshArtBackground imageUrl={currentImage} backgroundOpacity={1} />
+          <MeshArtBackground
+            imageUrl={currentImage}
+            backgroundOpacity={opacity}
+          />
         </div>
       </CrossFade>
       <GrainOverlay
-        blendMode="multiply"
+        blendMode="screen"
         animate={opacity > 0.25}
         opacity={Math.min(opacity, 0.15)}
+        grainSize="coarse"
+        color1="#113333"
+        color2="#001111"
       />
     </>
   );
