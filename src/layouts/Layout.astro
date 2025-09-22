@@ -90,24 +90,9 @@ const isHome = Astro.url.pathname === "/";
       )
     }
 
-    <style is:inline>
-      body {
-        visibility: hidden;
-        opacity: 0;
-      }
-    </style>
-
-    <style is:global>
-      body {
-        visibility: visible;
-        opacity: 1;
-        transition:
-          visibility 0.2s linear,
-          opacity 0.2s linear;
-      }
-    </style>
-
     <script is:inline>
+      let themeObserver;
+
       const setTheme = () => {
         let theme;
 
@@ -122,14 +107,21 @@ const isHome = Astro.url.pathname === "/";
             : "light";
         }
 
-        document.documentElement.classList[theme ? "add" : "remove"](theme);
+        document.documentElement.classList[theme === "dark" ? "add" : "remove"](
+          "dark",
+        );
 
-        if (typeof localStorage !== "undefined") {
-          const observer = new MutationObserver(() => {
-            const isDark = document.documentElement.classList.contains("dark");
-            localStorage.setItem("theme", isDark ? "dark" : "light");
+        if (typeof localStorage !== "undefined" && !themeObserver) {
+          let debounceTimer;
+          themeObserver = new MutationObserver(() => {
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(() => {
+              const isDark =
+                document.documentElement.classList.contains("dark");
+              localStorage.setItem("theme", isDark ? "dark" : "light");
+            }, 300);
           });
-          observer.observe(document.documentElement, {
+          themeObserver.observe(document.documentElement, {
             attributes: true,
             attributeFilter: ["class"],
           });
@@ -146,6 +138,23 @@ const isHome = Astro.url.pathname === "/";
         setTheme();
       });
     </script>
+
+    <style is:inline>
+      body {
+        visibility: hidden;
+        opacity: 0;
+      }
+    </style>
+
+    <style is:global>
+      body {
+        visibility: visible;
+        opacity: 1;
+        transition:
+          visibility 0.2s linear,
+          opacity 0.2s linear;
+      }
+    </style>
 
     <ClientRouter />
   </head>
