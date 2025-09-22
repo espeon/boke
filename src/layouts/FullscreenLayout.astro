@@ -98,3 +98,53 @@ if (!image && title) {
     <slot />
   </body>
 </html>
+
+<script is:inline>
+  let themeObserver;
+
+  const setTheme = () => {
+    let theme;
+
+    if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
+      theme = localStorage.getItem("theme");
+    } else {
+      theme = window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "light";
+    }
+
+    document.documentElement.classList[theme === "dark" ? "add" : "remove"](
+      "dark",
+    );
+
+    if (typeof localStorage !== "undefined" && !themeObserver) {
+      let debounceTimer;
+      themeObserver = new MutationObserver(() => {
+        // Ignore empty classList (transition state)
+        if (document.documentElement.className.trim() === "") {
+          return;
+        }
+
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(() => {
+          const isDark = document.documentElement.classList.contains("dark");
+          localStorage.setItem("theme", isDark ? "dark" : "light");
+        }, 50);
+      });
+      themeObserver.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ["class"],
+      });
+    }
+  };
+
+  setTheme();
+
+  document.addEventListener("astro:page-load", () => {
+    setTheme();
+  });
+
+  document.addEventListener("astro:after-swap", () => {
+    setTheme();
+  });
+</script>
