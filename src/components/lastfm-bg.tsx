@@ -59,14 +59,42 @@ export function LastFmBackground({
     activeKey,
   ]);
 
-  // if we're on / set var to 0.25, else 0.75
-  let opacity = 0.99;
-  if (new URL(window.location.href).pathname === "/") opacity = 0.5;
+  // Calculate opacity reactively
+  const [opacity, setOpacity] = useState(() => {
+    const isDarkMode = document.documentElement.classList.contains("dark");
+    const isHomePage = new URL(window.location.href).pathname === "/";
+    return isHomePage ? (isDarkMode ? 0.75 : 0.55) : 0.99;
+  });
+
+  useEffect(() => {
+    const updateOpacity = () => {
+      const isDarkMode = document.documentElement.classList.contains("dark");
+      const isHomePage = new URL(window.location.href).pathname === "/";
+      setOpacity(isHomePage ? (isDarkMode ? 0.75 : 0.55) : 0.99);
+    };
+
+    // Listen for theme changes
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.attributeName === "class") {
+          updateOpacity();
+        }
+      });
+    });
+
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <>
       <CrossFade contentKey={activeKey}>
         <div
+          className="bg-white dark:bg-black"
           style={{
             position: "absolute",
             inset: 0,
@@ -81,14 +109,7 @@ export function LastFmBackground({
           />
         </div>
       </CrossFade>
-      <GrainOverlay
-        blendMode="screen"
-        animate={opacity > 0.25}
-        opacity={Math.min(opacity, 0.15)}
-        grainSize="coarse"
-        color1="#113333"
-        color2="#001111"
-      />
+      <GrainOverlay opacity={opacity / 8} />
     </>
   );
 }
