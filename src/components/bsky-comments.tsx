@@ -266,9 +266,12 @@ const BlueskyReply = ({
 
       {/* Show "View more replies" button if depth limit reached */}
       {depth === MAX_DEPTH && replies && replies.length > 0 && (
-        <button className="mt-2 ml-4 text-blue-500">
+        <a
+          href={`https://bsky.app/profile/${author.did}/post/${post.uri.split("/").pop()}`}
+          className="mt-2 ml-4 text-blue-500"
+        >
           View more replies...
-        </button>
+        </a>
       )}
     </div>
   );
