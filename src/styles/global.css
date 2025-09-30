@@ -71,7 +71,7 @@
       @apply my-4 font-medium dark:text-white;
     }
     :not(pre) > code {
-      @apply rounded-sm border bg-zinc-200/50 px-1 py-0.5 font-mono text-sm font-medium whitespace-nowrap text-black dark:border-zinc-700 dark:bg-zinc-800/50 dark:text-white;
+      @apply rounded-sm border bg-zinc-200/50 px-1 py-0.5 font-mono text-sm font-medium text-black dark:border-zinc-700 dark:bg-zinc-800/50 dark:text-white;
     }
     pre:has(code) {
       @apply my-4 max-h-[600px] overflow-auto rounded-lg border p-4 font-mono text-sm font-medium dark:border-zinc-700;
