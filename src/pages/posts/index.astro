@@ -1,5 +1,6 @@
 ---
 import { getCollection } from "astro:content";
+import Footer from "../../components/Footer.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../../consts";
 import Layout from "../../layouts/Layout.astro";
 import { formatDate } from "../../lib/utils";
@@ -11,7 +12,7 @@ const posts = collection
 ---
 
 <Layout title={SITE_TITLE} description={SITE_DESCRIPTION}>
-  <main>
+  <main class="flex flex-1 flex-col">
     <ul class="flex flex-col gap-1.5">
       {
         posts.map((post) => (
@@ -32,5 +33,7 @@ const posts = collection
         ))
       }
     </ul>
+    <div class="h-100% flex-1"></div>
+    <Footer />
   </main>
 </Layout>

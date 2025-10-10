@@ -1,7 +1,8 @@
 ---
 import { type CollectionEntry } from "astro:content";
-import TableOfContents from "../components/TableOfContents.tsx";
 import BlueskyComments from "../components/bsky-comments.tsx";
+import Footer from "../components/Footer.astro";
+import TableOfContents from "../components/TableOfContents.tsx";
 import { formatDate } from "../lib/utils";
 import Layout from "./Layout.astro";
 
@@ -30,7 +31,7 @@ const readingMinutes = readingTime % 60;
   date={post.data.date}
   className="blog-post-layout"
 >
-  <div class="blog-post-container">
+  <div class="blog-post-container mb-32">
     <!-- Main content area -->
     <main>
       <header class="blog-post-header">
@@ -218,4 +219,5 @@ const readingMinutes = readingTime % 60;
       }
     }
   </style>
+  <Footer />
 </Layout>
