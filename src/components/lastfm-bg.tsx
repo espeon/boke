@@ -63,14 +63,14 @@ export function LastFmBackground({
   const [opacity, setOpacity] = useState(() => {
     const isDarkMode = document.documentElement.classList.contains("dark");
     const isHomePage = new URL(window.location.href).pathname === "/";
-    return isHomePage ? (isDarkMode ? 0.75 : 0.55) : 0.99;
+    return isHomePage ? (isDarkMode ? 0.55 : 0.45) : 0.99;
   });
 
   useEffect(() => {
     const updateOpacity = () => {
       const isDarkMode = document.documentElement.classList.contains("dark");
       const isHomePage = new URL(window.location.href).pathname === "/";
-      setOpacity(isHomePage ? (isDarkMode ? 0.75 : 0.55) : 0.99);
+      setOpacity(isHomePage ? (isDarkMode ? 0.55 : 0.45) : 0.99);
     };
 
     // Listen for theme changes
@@ -92,7 +92,7 @@ export function LastFmBackground({
 
   return (
     <>
-      <CrossFade contentKey={activeKey}>
+      <CrossFade timeout={2000} contentKey={activeKey}>
         <div
           className="bg-white dark:bg-black"
           style={{

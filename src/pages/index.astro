@@ -1,6 +1,6 @@
 ---
 import Ambilight from "../components/ambilight.astro";
-import { IconRow } from "../components/home/icon-row.tsx";
+import { IconRow } from "../components/home/icon-row";
 import { LastFM } from "../components/home/lastfm.tsx";
 import { LastFmBackground } from "../components/lastfm-bg";
 import PersistWrapper from "../components/PersistWrapper.astro";
@@ -11,55 +11,45 @@ import Layout from "../layouts/Layout.astro";
 <Layout title={SITE_TITLE} description={SITE_DESCRIPTION}>
   <Ambilight />
   <PersistWrapper>
-    <LastFmBackground client:only useDefaultImages={true} />
+    <LastFmBackground client:only useDefaultImages={false} />
   </PersistWrapper>
-  <main class="flex w-full flex-col items-start space-y-4">
-    <div class="space-y-2 text-start">
-      <img
-        src="/natb.jpg"
-        alt="natalie's profile"
-        class="ambilight h-32 w-32 rounded-full border border-neutral-500/50"
-      />
-      <div>
-        <h2 class="text-3xl font-bold">natalie b.</h2>
-        <p class="text-xl text-gray-800 dark:text-gray-400">
-          software, design, music. - nashville, tn.
-        </p>
-      </div>
-      <IconRow />
-      <div class="prose dark:prose-invert mb-0 max-w-lg space-y-2">
-        <div class="font-semibold">
-          i’m a full-stack developer, interested primarily in the web and
-          audiovisual media.
-        </div>
-        <div>
-          most recently, i've been working at <a
-            class="underline dark:border-sky-200 dark:text-sky-200"
-            href="https://stream.place/">streamplace</a
-          >, helping make live video easy and open for everyone, forever.
-        </div>
-        <div>
-          together with <a
-            class="underline dark:border-sky-200 dark:text-sky-200"
-            href="https://mmatt.net">matt</a
-          >, i founded <a
-            class="underline dark:border-sky-200 dark:text-sky-200"
-            href="https://teal.fm">teal.fm</a
-          > which is a platform for beautifully tracking your music. it should be
-          out shortly. i've also created <a
-            href="https://github.com/espeon/muse"
-            class="underline dark:border-sky-200 dark:text-sky-200">muse</a
-          >, a local music streaming platform close to my heart.
-        </div>
-        <div>
-          when i'm not at work, you'll find me exploring new music, tinkering
-          with audio gear, or reading. always happy to chat about web tech,
-          music production, or whatever project is currently consuming my brain.
-        </div>
+  <main class="mt-2 flex w-full flex-col items-start space-y-6">
+    <div class="text-xl">
+      <h2 class="font-semibold">Natalie B.</h2>
+      <p class="prose dark:prose-invert text-lg">
+        Making stuff for the web and beyond.
+      </p>
+    </div>
+
+    <div class="prose dark:prose-invert space-y-2">
+      <p>
+        Full-stack developer interested in web and audiovisual media. Currently
+        at <a href="https://stream.place/">Streamplace</a>, helping make live
+        video easy and open.
+      </p>
+      <p>
+        I'm building <a href="https://teal.fm">teal.fm</a> with <a
+          href="https://mmatt.net">Matt</a
+        >
+        for beautiful music tracking, and in the past I've made <a
+          href="https://github.com/espeon/muse">muse</a
+        >, which is a local music streaming platform.
+      </p>
+      <div class="max-w-full">
+        <LastFM client:load client:only />
       </div>
     </div>
-    <div class="h-26 max-w-full border-t border-neutral-500/50 pt-6">
-      <LastFM client:load client:only />
+    <div>
+      <p>You can find me elsewhere here:</p>
+      <IconRow smaller />
     </div>
   </main>
 </Layout>
+
+<style>
+  @reference "../styles/global.css";
+
+  .prose a {
+    @apply border-b-sky-800 underline dark:border-b-sky-200;
+  }
+</style>

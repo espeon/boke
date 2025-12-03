@@ -165,12 +165,6 @@ export function useLastFM(intervalMs: number = 10000, user = MAIN) {
     };
   }, [intervalMs, user]);
 
-  useEffect(() => {
-    if (globalData) {
-      console.log(globalData);
-    }
-  }, [globalData]);
-
   return {
     data: globalData,
     error: globalError,

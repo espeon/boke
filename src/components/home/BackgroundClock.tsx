@@ -1009,12 +1009,12 @@ export default function MeshArtBackground({
     }
   }, [currentImageUrl, onLoadingStateChange, noFadeIn]);
 
-  // // Update texture loaded state when noFadeIn changes
-  // useEffect(() => {
-  //   if (noFadeIn) {
-  //     setIsTextureLoaded(true);
-  //   }
-  // }, [noFadeIn]);
+  // Update texture loaded state when noFadeIn changes
+  useEffect(() => {
+    if (noFadeIn) {
+      setIsTextureLoaded(true);
+    }
+  }, [noFadeIn]);
 
   // Detect theme changes
   useEffect(() => {
@@ -1149,14 +1149,11 @@ export default function MeshArtBackground({
   }, []);
 
   return (
-    <div className="fixed inset-0 -z-10 h-screen w-full max-w-screen overflow-hidden transition-colors duration-300 dark:bg-neutral-900">
+    <div className="fixed inset-0 -z-10 h-screen w-full max-w-screen overflow-hidden bg-white transition-colors duration-300 dark:bg-neutral-950">
       <Canvas
         style={{
-          transition: `opacity ${isNavigating ? transitionDuration : 600}ms ease-out`,
-          opacity:
-            noFadeIn || isTextureLoaded || !isNavigating
-              ? backgroundOpacity
-              : 0,
+          transition: `opacity 1200ms ease-out`,
+          opacity: noFadeIn || isTextureLoaded ? backgroundOpacity : 0,
           willChange: "opacity",
           transform: "translateZ(0)",
         }}
