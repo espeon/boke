@@ -7,8 +7,15 @@ import { SmoothImage } from "../SmoothImage";
 import { FaLastfm } from "react-icons/fa";
 import { LuFileWarning } from "react-icons/lu";
 
+function useQueryParam(param: string): string | undefined {
+  if (typeof window === "undefined") return undefined;
+  const urlParams = new URLSearchParams(window.location.search);
+  return urlParams.get(param) || undefined;
+}
+
 export function LastFMPlayer() {
-  const { data, error } = useLastFM(2500);
+  const userParam = useQueryParam("user");
+  const { data, error } = useLastFM(2500, userParam);
 
   useEffect(() => {
     const newOpacity = data?.imageUrl ? 0.65 : 0;
