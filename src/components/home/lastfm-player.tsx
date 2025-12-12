@@ -25,51 +25,55 @@ export function LastFMPlayer() {
         (data?.artist || "abs") +
         (data?.name || "balls")
       }
+      timeout={400}
     >
-      <div className="min-h-[7.3rem] sm:min-h-[5.3rem]">
+      <div className="animate-[slideUpFade_0.4s_ease-out]">
         {data ? (
-          <div className="flex items-center gap-4 rounded-xl border border-gray-300/30 bg-white/40 p-4 backdrop-blur-sm dark:border-neutral-600/30 dark:bg-neutral-900/40">
+          <div className="flex items-center gap-3 rounded-2xl bg-white/60 p-1.5 backdrop-blur-sm dark:bg-neutral-950/60">
             {/* Album Art */}
             <div className="relative flex-shrink-0">
               {data.imageUrl ===
               "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png" ? (
-                <div className="flex h-20 w-20 items-center justify-center rounded-lg border border-gray-300/30 bg-gradient-to-br from-pink-500/20 to-purple-500/20 text-gray-700 dark:border-neutral-600/30 dark:text-gray-400">
-                  <LuFileWarning className="text-2xl" />
+                <div className="flex h-16 w-16 items-center justify-center rounded-md border border-gray-300/30 bg-gradient-to-br from-pink-500/20 to-purple-500/20 text-gray-700 dark:border-neutral-600/30 dark:text-gray-400">
+                  <LuFileWarning className="text-xl" />
                 </div>
               ) : (
                 <SmoothImage
                   src={data.imageUrl}
                   base64Src={data.base64Image}
                   alt="Album cover"
-                  className="h-20 w-20 rounded-lg border border-gray-300/20 object-cover dark:border-neutral-600/30"
+                  className="h-16 w-16 rounded-xl border-1 border-gray-300/70 object-cover dark:border-neutral-600/30"
                 />
               )}
 
               {/* Now Playing Indicator */}
               {data.isCurrent && (
-                <div className="absolute -top-1 -right-1 h-3 w-3 animate-pulse rounded-full bg-pink-600 ring-2 ring-white dark:ring-neutral-900"></div>
+                <>
+                  <div className="absolute -top-0.5 -right-0.5 z-10 h-2.5 w-2.5 animate-pulse rounded-full bg-red-300 ring-1 ring-white dark:ring-neutral-950"></div>
+                  <div className="absolute -top-0.5 -right-0.5 z-0 h-2.5 w-2.5 rounded-full bg-pink-950 ring-1 ring-white dark:ring-neutral-950"></div>
+                </>
               )}
             </div>
 
             {/* Track Info */}
-            <div className="flex min-w-0 flex-1 flex-col gap-1">
-              <div className="flex items-end-safe gap-1.5">
-                <span className="text-xs text-gray-600 dark:text-gray-400">
+            <div className="flex min-w-0 flex-1 flex-col">
+              <div className="flex items-center gap-1.5">
+                <span className="text-sm text-gray-700 dark:text-gray-600">
                   {data.isCurrent ? "now playing" : "last played"} on
                 </span>
                 <a
                   href="https://www.last.fm/user/kanb"
                   target="_blank"
-                  className="mb-0.15 text-gray-600 transition-colors hover:text-pink-600 dark:text-gray-400 dark:hover:text-pink-400"
+                  className="text-gray-700 transition-colors hover:text-pink-600 dark:text-gray-800 dark:hover:text-pink-400"
                 >
-                  <FaLastfm className="text-sm" />
+                  <FaLastfm className="text-base" />
                 </a>
               </div>
 
               <a
                 href={`https://www.last.fm/music/${encodeURIComponent(data.artist)}/_/${encodeURIComponent(data.name)}`}
                 target="_blank"
-                className="truncate font-semibold text-gray-900 transition-colors hover:text-pink-600 dark:text-gray-100 dark:hover:text-pink-400"
+                className="truncate text-base font-semibold text-gray-900 transition-colors hover:text-pink-600 dark:text-gray-100 dark:hover:text-pink-400"
               >
                 {data.name}
               </a>
@@ -84,14 +88,14 @@ export function LastFMPlayer() {
             </div>
           </div>
         ) : error ? (
-          <div className="rounded-xl border border-red-300/30 bg-red-50/40 p-4 backdrop-blur-sm dark:border-red-600/30 dark:bg-red-900/20">
+          <div className="rounded-lg bg-red-50/40 p-3 backdrop-blur-sm dark:bg-red-950/60">
             <span className="text-red-700 dark:text-red-400">
               {error.message}
             </span>
           </div>
         ) : (
-          <div className="flex items-center gap-4 rounded-xl border border-gray-300/30 bg-white/40 p-4 backdrop-blur-sm dark:border-neutral-600/30 dark:bg-neutral-900/40">
-            <div className="h-20 w-20 animate-pulse rounded-lg bg-gray-300/50 dark:bg-neutral-700/50"></div>
+          <div className="flex items-center gap-3 rounded-lg bg-white/40 p-3 backdrop-blur-sm dark:bg-neutral-950/60">
+            <div className="h-16 w-16 animate-pulse rounded-md bg-gray-300/50 dark:bg-neutral-700/50"></div>
             <div className="flex-1 space-y-2">
               <div className="h-4 w-3/4 animate-pulse rounded bg-gray-300/50 dark:bg-neutral-700/50"></div>
               <div className="h-3 w-1/2 animate-pulse rounded bg-gray-300/50 dark:bg-neutral-700/50"></div>
