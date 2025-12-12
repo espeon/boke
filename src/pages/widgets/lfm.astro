@@ -1,0 +1,9 @@
+---
+import { LastFMPlayer } from "../../components/home/lastfm-player";
+import WidgetLayout from "../../layouts/WidgetLayout.astro";
+import "../../styles/global.css";
+---
+
+<WidgetLayout title="last.fm" description="natalie's last.fm profile">
+  <LastFMPlayer client:only />
+</WidgetLayout>

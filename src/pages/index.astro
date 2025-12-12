@@ -13,22 +13,23 @@ import Layout from "../layouts/Layout.astro";
   <PersistWrapper>
     <LastFmBackground client:only useDefaultImages={false} />
   </PersistWrapper>
-  <main class="mt-2 flex w-full flex-col items-start space-y-6">
-    <div class="text-2xl">
-      <h2 class="font-semibold">Natalie B.</h2>
-      <p class="prose dark:prose-invert text-xl">
+  <main class="flex w-full flex-col items-start space-y-1 pt-2 md:pt-6">
+    <div class="space-y-1">
+      <img src="/face.png" class="mb-4 h-32 w-32 -rotate-30 rounded-full" />
+      <h2 class="origin-left text-3xl">Natalie B.</h2>
+      <p class="text-lg dark:text-neutral-300">
         Making stuff for the web and beyond.
       </p>
     </div>
 
     <div class="prose dark:prose-invert">
       <p>
-        Full-stack developer interested in web and audiovisual media. Currently
-        at <a href="https://stream.place/">Streamplace</a>, helping make live
-        video easy and open.
+        Currently at <a href="https://stream.place/">Streamplace</a>, helping
+        make live video easy and open.
       </p>
       <p>
-        I'm also building <a href="https://teal.fm">teal.fm</a> with <a
+        I'm a full-stack developer interested in web and audiovisual media. Also
+        building <a href="https://teal.fm">teal.fm</a> with <a
           href="https://mmatt.net">Matt</a
         >
         for beautiful music tracking, and in the past I've made <a

@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,200..800;1,200..800&family=Baskervville:ital,wght@0,400..700;1,400..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=TASA+Orbiter:wght@400..800&display=swap");
 
 @import "tailwindcss";
 
@@ -8,10 +8,10 @@
 
 @theme {
   --font-sans:
-    "Atkinson Hyperlegible Next", ui-sans-serif, system-ui, sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    "TASA Orbiter", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --font-serif:
-    "Baskervville", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+    "EB Garamond", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
   --font-mono:
     "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
     "Liberation Mono", "Courier New", monospace;
