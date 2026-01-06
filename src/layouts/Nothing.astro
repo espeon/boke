@@ -1,0 +1,149 @@
+---
+import { ClientRouter } from "astro:transitions";
+
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  className?: string;
+  date?: string | Date;
+}
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+let { title, description, date, image, className } = Astro.props;
+
+// https://ogimage-workers.kanbaru.workers.dev/?title=Godot%20and%20VSCode%3A%20How%20to%20integrate%20them%20together&liner=Supercharge%20your%20game%20dev%20workflow%20by%20using%20VSCode%20instead%20of%20Godot%27s%20text%20editor.&date=Mar.%2012,%202024
+if (!image && title) {
+  // Default image if none is provided
+  let params = {
+    title: title || "Default Title",
+    liner: description || "Default description for the OG image.",
+    date: date
+      ? new Date(date).toLocaleDateString("en-US", {
+          month: "short",
+          day: "numeric",
+          year: "numeric",
+        })
+      : new Date().toLocaleDateString("en-US", {
+          month: "short",
+          day: "numeric",
+          year: "numeric",
+        }),
+  };
+  image = `https://ogimage-workers.kanbaru.workers.dev/?${new URLSearchParams(params)}`;
+}
+
+const isHome = Astro.url.pathname === "/";
+---
+
+<html lang="en">
+  <head>
+    <!-- Global Metadata -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Font preloads -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,200..800;1,200..800&family=Baskervville:ital,wght@0,400..700;1,400..700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="preload"
+      href="/fonts/geist-mono-variable.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Primary Meta Tags -->
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={Astro.url} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    {image && <meta property="og:image" content={new URL(image, Astro.url)} />}
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={Astro.url} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    {
+      image && (
+        <meta property="twitter:image" content={new URL(image, Astro.url)} />
+      )
+    }
+
+    <ClientRouter />
+  </head>
+  <body
+    class="max-h-max min-h-screen w-screen max-w-screen overflow-x-clip font-sans text-zinc-900 antialiased transition-colors dark:bg-zinc-950 dark:text-zinc-200"
+  >
+    <slot />
+  </body><script is:inline>
+    let themeObserver;
+
+    const setTheme = () => {
+      let theme;
+
+      if (
+        typeof localStorage !== "undefined" &&
+        localStorage.getItem("theme")
+      ) {
+        theme = localStorage.getItem("theme");
+      } else {
+        theme = window.matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "light";
+      }
+
+      document.documentElement.classList[theme === "dark" ? "add" : "remove"](
+        "dark",
+      );
+
+      if (typeof localStorage !== "undefined" && !themeObserver) {
+        let debounceTimer;
+        themeObserver = new MutationObserver(() => {
+          // Ignore empty classList (transition state)
+          if (document.documentElement.className.trim() === "") {
+            return;
+          }
+
+          clearTimeout(debounceTimer);
+          debounceTimer = setTimeout(() => {
+            const isDark = document.documentElement.classList.contains("dark");
+            localStorage.setItem("theme", isDark ? "dark" : "light");
+          }, 50);
+        });
+        themeObserver.observe(document.documentElement, {
+          attributes: true,
+          attributeFilter: ["class"],
+        });
+      }
+    };
+
+    setTheme();
+
+    document.addEventListener("astro:page-load", () => {
+      setTheme();
+    });
+
+    document.addEventListener("astro:after-swap", () => {
+      setTheme();
+    });
+  </script>
+</html>
