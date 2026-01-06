@@ -3,6 +3,8 @@ import Layout from "../layouts/Nothing.astro";
 ---
 
 <Layout title="gogogle balls" description="gmaougle balls">
+  <canvas id="c" width="400" height="400" style="background:transparent;"
+  ></canvas>
   <script is:inline>
     class Vector {
       constructor(x = 0, y = 0, z = 0) {
@@ -227,6 +229,4 @@ import Layout from "../layouts/Nothing.astro";
     const canvas = document.getElementById("c");
     new ParticleSystem(canvas, particleData);
   </script>
-  <canvas id="c" width="400" height="400" style="background:transparent;"
-  ></canvas>
 </Layout>
