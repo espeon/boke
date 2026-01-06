@@ -1,8 +1,3 @@
----
-import Layout from "../layouts/Nothing.astro";
-console.log("EPIC MAN");
----
-
 <script>
   class Vector {
     constructor(x = 0, y = 0, z = 0) {
@@ -227,7 +222,5 @@ console.log("EPIC MAN");
   const canvas = document.getElementById("c");
   new ParticleSystem(canvas, particleData);
 </script>
-<Layout>
-  <canvas id="c" width="400" height="400" style="background:transparent;"
-  ></canvas>
-</Layout>
+<canvas id="c" width="400" height="400" style="background:transparent;"
+></canvas>
