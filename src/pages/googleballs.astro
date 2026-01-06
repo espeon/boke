@@ -1,4 +1,8 @@
-<script>
+---
+import Layout from "../layouts/Nothing.astro";
+---
+
+<script is:inline>
   class Vector {
     constructor(x = 0, y = 0, z = 0) {
       this.x = x;
@@ -222,5 +226,7 @@
   const canvas = document.getElementById("c");
   new ParticleSystem(canvas, particleData);
 </script>
-<canvas id="c" width="400" height="400" style="background:transparent;"
-></canvas>
+<Layout>
+  <canvas id="c" width="400" height="400" style="background:transparent;"
+  ></canvas>
+</Layout>
