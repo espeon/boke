@@ -19,15 +19,17 @@ const posts = collection
           <li>
             <a
               href={`/posts/${post.slug}`}
-              class="group flex justify-between gap-3 pb-3"
+              class="group flex flex-col justify-between gap-1 pb-3"
             >
-              <div>
-                <div class="group-hover:underline">{post.data.title}</div>
-                <div class="text-neutral-400">{post.data.description}</div>
+              <div class="flex flex-row items-center justify-between">
+                <div class="font-serif text-lg group-hover:underline">
+                  {post.data.title}
+                </div>
+                <span class="text-nowrap text-zinc-500">
+                  {formatDate(post.data.date)}
+                </span>
               </div>
-              <span class="text-nowrap text-zinc-500">
-                {formatDate(post.data.date)}
-              </span>
+              <div class="text-neutral-400">{post.data.description}</div>
             </a>
           </li>
         ))

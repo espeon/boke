@@ -1,4 +1,11 @@
-@import url("https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=TASA+Orbiter:wght@400..800&display=swap");
+@font-face {
+  font-family: "TL Infinite Loop";
+  src: url(/fonts/TLInfiniteLoop-Regular.otf) format("opentype");
+}
+@font-face {
+  font-family: "TASA Orbiter Variable";
+  src: url(/fonts/TASAOrbiter.ttf) format("truetype");
+}
 
 @import "tailwindcss";
 
@@ -8,10 +15,11 @@
 
 @theme {
   --font-sans:
-    "TASA Orbiter", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
-    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    "TASA Orbiter Variable", ui-sans-serif, system-ui, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --font-serif:
-    "EB Garamond", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+    "TL Infinite Loop", ui-serif, Georgia, Cambria, "Times New Roman", Times,
+    serif;
   --font-mono:
     "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
     "Liberation Mono", "Courier New", monospace;
