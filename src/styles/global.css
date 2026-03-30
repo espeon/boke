@@ -7,6 +7,8 @@
   src: url(/fonts/TASAOrbiter.ttf) format("truetype");
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Fustat:wght@200..800&display=swap');
+
 @import "tailwindcss";
 
 @plugin "@tailwindcss/typography";
@@ -15,7 +17,7 @@
 
 @theme {
   --font-sans:
-    "TASA Orbiter Variable", ui-sans-serif, system-ui, sans-serif,
+    "Fustat", ui-sans-serif, system-ui, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --font-serif:
     "TL Infinite Loop", ui-serif, Georgia, Cambria, "Times New Roman", Times,
