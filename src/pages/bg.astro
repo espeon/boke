@@ -1,0 +1,10 @@
+---
+import { LastFmBackground } from "../components/lastfm-bg";
+import PersistWrapper from "../components/PersistWrapper.astro";
+import FullscreenLayout from "../layouts/FullscreenLayout.astro";
+import "../styles/global.css";
+---
+
+<FullscreenLayout title="last.fm" description="natalie's last.fm profile">
+    <LastFmBackground client:only />
+</FullscreenLayout>
