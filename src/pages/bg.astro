@@ -1,10 +1,16 @@
 ---
 import { LastFmBackground } from "../components/lastfm-bg";
+import { LastFMFullscreen } from "../components/lastfm-fullscreen.tsx";
 import PersistWrapper from "../components/PersistWrapper.astro";
 import FullscreenLayout from "../layouts/FullscreenLayout.astro";
 import "../styles/global.css";
 ---
 
 <FullscreenLayout title="last.fm" description="natalie's last.fm profile">
+    <div class="opacity-0">
+        <PersistWrapper>
+            <LastFMFullscreen client:only />
+        </PersistWrapper>
+    </div>
     <LastFmBackground client:only />
 </FullscreenLayout>
