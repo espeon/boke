@@ -91,6 +91,17 @@ const isHome = Astro.url.pathname === "/";
     }
 
     <script is:inline>
+      if (window.location.hash.startsWith("#note-") || window.location.hash.startsWith("#ref-")) {
+        const noteHash = window.location.hash;
+        if ("scrollRestoration" in history) {
+          history.scrollRestoration = "manual";
+        }
+        const url = window.location.pathname + window.location.search;
+        history.replaceState(null, "", url);
+        window.addEventListener("DOMContentLoaded", () => {
+          history.replaceState(null, "", noteHash);
+        });
+      }
       let themeObserver;
 
       const setTheme = () => {

@@ -1,4 +1,3 @@
-"use client";
 import { useEffect, useState, useRef } from "react";
 
 interface TocItem {
@@ -50,15 +49,6 @@ function calc(container: HTMLElement, active: string[]): TOCThumb {
     upper = Math.min(upper, elementTop);
     lower = Math.max(lower, elementBottom);
   }
-
-  console.log(
-    "calc result: upper =",
-    upper,
-    "lower =",
-    lower,
-    "height =",
-    lower - upper,
-  );
   return [upper, lower - upper];
 }
 

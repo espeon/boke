@@ -6,8 +6,20 @@
   font-family: "TASA Orbiter Variable";
   src: url(/fonts/TASAOrbiter.ttf) format("truetype");
 }
+@font-face {
+  font-family: "Valley Sans";
+  src: url("/fonts/ValleySans[wght].woff2") format("woff2");
+  weight: 100 900;
+}
 
-@import url('https://fonts.googleapis.com/css2?family=Fustat:wght@200..800&display=swap');
+@font-face {
+  font-family: "Valley Sans";
+  src: url("/fonts/ValleySans-Italic[wght].woff2") format("woff2");
+  font-style: italic;
+  weight: 100 900;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,200..800;1,200..800&display=swap");
 
 @import "tailwindcss";
 
@@ -17,8 +29,11 @@
 
 @theme {
   --font-sans:
-    "Fustat", ui-sans-serif, system-ui, sans-serif,
+    "Atkinson Hyperlegible Next", ui-sans-serif, system-ui, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-display:
+    "Valley Sans", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --font-serif:
     "TL Infinite Loop", ui-serif, Georgia, Cambria, "Times New Roman", Times,
     serif;
@@ -95,6 +110,80 @@
     blockquote {
       @apply my-4 border-l-2 pl-4;
     }
+    .callout {
+      @apply my-6 rounded-md border text-sm;
+      padding: 0;
+    }
+    .callout-title {
+      @apply flex items-center gap-2 rounded-t-md border-b px-4 py-2 font-medium;
+    }
+    .callout-title::before {
+      content: "";
+      display: inline-block;
+      width: 0.5rem;
+      height: 0.5rem;
+      border-radius: 9999px;
+      background: currentColor;
+      flex-shrink: 0;
+    }
+    .callout-content {
+      @apply px-4 [&>p]:my-2 [&>p:first-child]:mt-0 [&>p:last-child]:mb-0;
+    }
+    .callout[data-type="note"] {
+      @apply border-zinc-300 bg-zinc-100/60 text-zinc-800 dark:border-zinc-700 dark:bg-zinc-900/60 dark:text-zinc-200;
+    }
+    .callout[data-type="note"] .callout-title {
+      @apply border-zinc-300 text-zinc-700 dark:border-zinc-700 dark:text-zinc-300;
+    }
+    .callout[data-type="tip"],
+    .callout[data-type="important"] {
+      @apply border-emerald-300 bg-emerald-50/60 text-emerald-900 dark:border-emerald-800/60 dark:bg-emerald-950/30 dark:text-emerald-200;
+    }
+    .callout[data-type="tip"] .callout-title,
+    .callout[data-type="important"] .callout-title {
+      @apply border-emerald-300 text-emerald-700 dark:border-emerald-800/60 dark:text-emerald-300;
+    }
+    .callout[data-type="info"] {
+      @apply border-sky-300 bg-sky-50/60 text-sky-900 dark:border-sky-800/60 dark:bg-sky-950/30 dark:text-sky-200;
+    }
+    .callout[data-type="info"] .callout-title {
+      @apply border-sky-300 text-sky-700 dark:border-sky-800/60 dark:text-sky-300;
+    }
+    .callout[data-type="warning"],
+    .callout[data-type="caution"] {
+      @apply border-amber-300 bg-amber-50/60 text-amber-900 dark:border-amber-800/60 dark:bg-amber-950/30 dark:text-amber-200;
+    }
+    .callout[data-type="warning"] .callout-title,
+    .callout[data-type="caution"] .callout-title {
+      @apply border-amber-300 text-amber-700 dark:border-amber-800/60 dark:text-amber-300;
+    }
+    .callout[data-type="danger"] {
+      @apply border-red-300 bg-red-50/60 text-red-900 dark:border-red-800/60 dark:bg-red-950/30 dark:text-red-200;
+    }
+    .callout[data-type="danger"] .callout-title {
+      @apply border-red-300 text-red-700 dark:border-red-800/60 dark:text-red-300;
+    }
+    .margin-note-marker {
+      @apply text-blue-500 no-underline;
+    }
+    .margin-note-marker sup {
+      @apply text-[0.7em];
+    }
+    .margin-note {
+      @apply my-3 rounded-md border-l-2 border-zinc-300 bg-zinc-100/50 px-3 py-2 text-sm leading-snug text-zinc-700 dark:border-zinc-700 dark:bg-zinc-900/50 dark:text-zinc-300;
+    }
+    .margin-note p {
+      @apply m-0;
+    }
+    .margin-note a {
+      @apply text-blue-500 underline;
+    }
+    .margin-note-backref {
+      @apply ml-1 no-underline opacity-60 transition-opacity hover:opacity-100;
+    }
+    .callout p {
+      @apply py-0;
+    }
     a {
       @apply text-blue-500 underline;
     }
@@ -119,6 +208,94 @@
     mark {
       @apply dark:bg-yellow-500/50 dark:text-white;
     }
+  }
+}
+
+@media (min-width: 1536px) {
+  article {
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-right: 0;
+  }
+  body.margin-notes-shown article:has(> .margin-note) {
+    margin-left: -130px;
+  }
+  body.margin-notes-shown .margin-note {
+    float: right;
+    clear: right;
+    width: 240px;
+    margin-right: -260px;
+    margin-top: 0.25rem;
+    margin-bottom: 1rem;
+    position: relative;
+    background: transparent;
+    border: none;
+    padding: 0;
+    color: var(--color-zinc-500);
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
+  body.margin-notes-shown .margin-note + .margin-note {
+    margin-top: 0.5rem;
+  }
+}
+
+@media (min-width: 1900px) {
+  body.margin-notes-shown article:has(> .margin-note) {
+    /* only avoid the TOC if there are margin notes in the article
+       * toc clears at sizes > 1920px
+       */
+    margin-left: 0px !important;
+  }
+  article {
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-right: 0;
+  }
+  body.margin-notes-shown .margin-note {
+    float: right;
+    clear: right;
+    width: 240px;
+    margin-right: -260px;
+    margin-top: 0.25rem;
+    margin-bottom: 1rem;
+    position: relative;
+    background: transparent;
+    border: none;
+    padding: 0;
+    color: var(--color-zinc-500);
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
+  body.margin-notes-shown .margin-note + .margin-note {
+    margin-top: 0.5rem;
+  }
+}
+
+.margin-note:target,
+:target.margin-note-marker {
+  animation: margin-note-flash 1.2s ease-out;
+}
+@keyframes margin-note-flash {
+  0% {
+    background-color: rgba(59, 130, 246, 0.3);
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+html.dark .margin-note:target,
+html.dark :target.margin-note-marker {
+  animation: margin-note-flash-dark 1.2s ease-out;
+}
+@keyframes margin-note-flash-dark {
+  0% {
+    background-color: rgba(59, 130, 246, 0.25);
+  }
+  100% {
+    background-color: transparent;
   }
 }
 

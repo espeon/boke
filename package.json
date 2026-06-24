@@ -39,7 +39,9 @@
     "tailwind-merge": "^2.6.0",
     "tailwindcss": "^4.1.11",
     "three": "^0.178.0",
-    "typescript": "^5.9.2"
+    "typescript": "^5.9.2",
+    "unist-util-visit": "^5.1.0",
+    "unist-util-visit-parents": "^6.0.2"
   },
   "devDependencies": {
     "prettier": "^3.6.2",
