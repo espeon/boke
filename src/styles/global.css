@@ -164,9 +164,15 @@
       @apply border-red-300 text-red-700 dark:border-red-800/60 dark:text-red-300;
     }
     .margin-note-marker {
-      @apply text-blue-500 no-underline;
+      @apply no-underline;
     }
     .margin-note-marker sup {
+      @apply text-[0.7em];
+    }
+    .margin-note-id-marker {
+      @apply mr-1 font-medium text-blue-500;
+    }
+    .margin-note-id-marker sup {
       @apply text-[0.7em];
     }
     .margin-note {
@@ -179,7 +185,11 @@
       @apply text-blue-500 underline;
     }
     .margin-note-backref {
-      @apply ml-1 no-underline opacity-60 transition-opacity hover:opacity-100;
+      @apply ml-1 inline-flex align-middle no-underline opacity-60 transition-opacity hover:opacity-100;
+    }
+    .margin-note-backref svg {
+      width: 0.9em;
+      height: 0.9em;
     }
     .callout p {
       @apply py-0;
@@ -227,17 +237,18 @@
     width: 240px;
     margin-right: -260px;
     margin-top: 0.25rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.25rem;
     position: relative;
     background: transparent;
-    border: none;
-    padding: 0;
+    border-left: 2px solid var(--color-zinc-300);
+    border-radius: 0;
+    padding: 0 0 0 0.75rem;
     color: var(--color-zinc-500);
     font-size: 0.85rem;
     line-height: 1.5;
   }
   body.margin-notes-shown .margin-note + .margin-note {
-    margin-top: 0.5rem;
+    margin-top: 0.25rem;
   }
 }
 
@@ -260,22 +271,32 @@
     width: 240px;
     margin-right: -260px;
     margin-top: 0.25rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.25rem;
     position: relative;
     background: transparent;
-    border: none;
-    padding: 0;
+    border-left: 2px solid var(--color-zinc-300);
+    border-radius: 0;
+    padding: 0 0 0 0.75rem;
     color: var(--color-zinc-500);
     font-size: 0.85rem;
     line-height: 1.5;
   }
   body.margin-notes-shown .margin-note + .margin-note {
-    margin-top: 0.5rem;
+    margin-top: 0.25rem;
+  }
+}
+
+@media (min-width: 1536px) {
+  html.dark body.margin-notes-shown .margin-note {
+    border-left-color: var(--color-zinc-700);
+    color: var(--color-zinc-300);
   }
 }
 
 .margin-note:target,
-:target.margin-note-marker {
+.margin-note.flash,
+:target.margin-note-marker,
+.margin-note-marker.flash {
   animation: margin-note-flash 1.2s ease-out;
 }
 @keyframes margin-note-flash {
@@ -287,7 +308,9 @@
   }
 }
 html.dark .margin-note:target,
-html.dark :target.margin-note-marker {
+html.dark .margin-note.flash,
+html.dark :target.margin-note-marker,
+html.dark .margin-note-marker.flash {
   animation: margin-note-flash-dark 1.2s ease-out;
 }
 @keyframes margin-note-flash-dark {

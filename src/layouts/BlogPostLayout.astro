@@ -289,11 +289,14 @@ const readingMinutes = readingTime % 60;
         if (noteLink) {
           event.preventDefault();
           const href = noteLink.getAttribute("href");
-          if (href) {
-            history.replaceState(null, "", href);
+          const el = href && document.getElementById(href.slice(1));
+          if (el) {
+            el.classList.remove("flash");
+            void el.offsetWidth; // force reflow so the animation can restart
+            el.classList.add("flash");
           }
         }
-      });
+      }, true);
     }
 
     applyMarginNotesState();

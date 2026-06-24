@@ -58,6 +58,10 @@ export default function remarkMarginNotes() {
         type: "html",
         value: `<aside class="margin-note" data-note="${label}" id="note-${label}">`,
       };
+      const asideIdMarker = {
+        type: "html",
+        value: `<span class="margin-note-id-marker" id="note-${label}-marker"><sup>${label}</sup></span>`,
+      };
       const backref = {
         type: "html",
         value: `<a href="#ref-${label}" class="margin-note-backref" aria-label="Back to reference ${label}">
@@ -71,10 +75,18 @@ export default function remarkMarginNotes() {
 
       paragraph.children.splice(indexInPara, 1, markerHtml);
 
+      // Tufte-style: prefix the note's first line with the id marker.
+      const firstNote = noteContent[0];
+      const inlineMarker = firstNote && firstNote.type === "paragraph";
+      if (inlineMarker) {
+        firstNote.children.unshift(asideIdMarker);
+      }
+
       blockParent.children.splice(
-        paraIndex + 1,
+        paraIndex,
         0,
         asideOpen,
+        ...(inlineMarker ? [] : [asideIdMarker]),
         ...noteContent,
         backref,
         asideClose,

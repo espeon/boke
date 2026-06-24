@@ -1,6 +1,6 @@
 ---
 title: "The Atmosphere"
-description: "A less-technical introduction to the atmosphere"
+description: "A slightly-less-technical introduction"
 date: "Jun 24 2026"
 draft: true
 ---
