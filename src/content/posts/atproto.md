@@ -35,15 +35,6 @@ The place where your data lives is called a "Personal Data Server" (PDS). You ca
 > [!NOTE]  
 > Your data is portable (yours to carry and yours to back up) but not magically indestructible. If a host shut down and you had no backup, you could lose data but you'd keep your identity.
 
-> [!TIP]  
-> Tip with a custom title.
-
-> [!WARNING]  
-> Watch out for this thing.
-
-> [!DANGER]  
-> Don't do this.
-
 
 So, Google hands you two convenient things: an identity you sign in with, and a place to keep your files. Both of them are Google's. the Atmosphere is what it looks like when both are yours instead. A network (the *AT Protocol*, or *atproto* for short) with an identity no single company holds, and storage you can put wherever you like, or run yourself. Almost everything else about how it works falls out of those two ideas.
 
