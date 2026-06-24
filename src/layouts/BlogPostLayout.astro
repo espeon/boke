@@ -262,6 +262,13 @@ const readingMinutes = readingTime % 60;
       const shown = localStorage.getItem(STORAGE_KEY) === "true";
       document.body.classList.toggle("margin-notes-shown", shown);
 
+      // Hiding all notes also closes any individually-opened ones.
+      if (!shown) {
+        document
+          .querySelectorAll(".margin-note.open")
+          .forEach((note) => note.classList.remove("open"));
+      }
+
       const label = document.getElementById("margin-notes-toggle-label");
       if (label) {
         label.textContent = shown ? "Margin notes on" : "Margin notes";
@@ -291,6 +298,12 @@ const readingMinutes = readingTime % 60;
           const href = noteLink.getAttribute("href");
           const el = href && document.getElementById(href.slice(1));
           if (el) {
+            const shown =
+              document.body.classList.contains("margin-notes-shown");
+            // Collapsed mode: tapping a reference opens/closes its note.
+            if (!shown && href.startsWith("#note-")) {
+              if (!el.classList.toggle("open")) return;
+            }
             el.classList.remove("flash");
             void el.offsetWidth; // force reflow so the animation can restart
             el.classList.add("flash");

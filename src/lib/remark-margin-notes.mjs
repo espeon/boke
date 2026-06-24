@@ -82,8 +82,31 @@ export default function remarkMarginNotes() {
         firstNote.children.unshift(asideIdMarker);
       }
 
-      blockParent.children.splice(
-        paraIndex,
+      // Wrap the block and its notes together so CSS can place the note
+      // beside the block (margin mode) or after it (inline/collapsed mode).
+      const isWrapper =
+        blockParent.data?.hName === "div" &&
+        blockParent.data?.hProperties?.className?.includes("margin-note-block");
+
+      let wrapper = blockParent;
+      let insertIndex = paraIndex;
+      if (!isWrapper) {
+        wrapper = {
+          type: "paragraph",
+          data: {
+            hName: "div",
+            hProperties: { className: ["margin-note-block"] },
+          },
+          children: [paragraph],
+        };
+        blockParent.children.splice(paraIndex, 1, wrapper);
+        insertIndex = 0;
+      } else {
+        insertIndex = wrapper.children.indexOf(paragraph);
+      }
+
+      wrapper.children.splice(
+        insertIndex,
         0,
         asideOpen,
         ...(inlineMarker ? [] : [asideIdMarker]),

@@ -175,6 +175,13 @@
     .margin-note-id-marker sup {
       @apply text-[0.7em];
     }
+    .margin-note-block {
+      @apply my-4 flex flex-col;
+    }
+    .margin-note-block > :not(.margin-note) {
+      margin: 0;
+      order: -1;
+    }
     .margin-note {
       @apply my-3 rounded-md border-l-2 border-zinc-300 bg-zinc-100/50 px-3 py-2 text-sm leading-snug text-zinc-700 dark:border-zinc-700 dark:bg-zinc-900/50 dark:text-zinc-300;
     }
@@ -228,8 +235,11 @@
     margin-right: auto;
     padding-right: 0;
   }
-  body.margin-notes-shown article:has(> .margin-note) {
+  body.margin-notes-shown article:has(.margin-note) {
     margin-left: -130px;
+  }
+  body.margin-notes-shown .margin-note-block {
+    display: block;
   }
   body.margin-notes-shown .margin-note {
     float: right;
@@ -253,7 +263,7 @@
 }
 
 @media (min-width: 1900px) {
-  body.margin-notes-shown article:has(> .margin-note) {
+  body.margin-notes-shown article:has(.margin-note) {
     /* only avoid the TOC if there are margin notes in the article
        * toc clears at sizes > 1920px
        */
@@ -291,6 +301,14 @@
     border-left-color: var(--color-zinc-700);
     color: var(--color-zinc-300);
   }
+}
+
+/* Collapsed mode (toggle off): notes hidden until their reference is tapped open. */
+body:not(.margin-notes-shown) .margin-note {
+  display: none;
+}
+body:not(.margin-notes-shown) .margin-note.open {
+  display: block;
 }
 
 .margin-note:target,
