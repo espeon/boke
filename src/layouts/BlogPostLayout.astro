@@ -1,6 +1,5 @@
 ---
 import { type CollectionEntry } from "astro:content";
-import Footer from "../components/Footer.astro";
 import TableOfContents from "../components/TableOfContents.tsx";
 import { formatDate } from "../lib/utils";
 import Layout from "./Layout.astro";
@@ -26,8 +25,6 @@ const readingMinutes = readingTime % 60;
 <Layout
   title={post.data.title}
   description={post.data.description}
-  image={post.data.image}
-  date={post.data.date}
   className="blog-post-layout"
 >
   <div class="blog-post-container mb-32">
@@ -227,7 +224,6 @@ const readingMinutes = readingTime % 60;
       }
     }
   </style>
-  <Footer />
   <script>
     const STORAGE_KEY = "margin-notes-shown";
 

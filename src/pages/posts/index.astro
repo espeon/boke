@@ -1,6 +1,5 @@
 ---
 import { getCollection } from "astro:content";
-import Footer from "../../components/Footer.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../../consts";
 import Layout from "../../layouts/Layout.astro";
 import { formatDate } from "../../lib/utils";
@@ -35,7 +34,5 @@ const posts = collection
         ))
       }
     </ul>
-    <div class="h-100% flex-1"></div>
-    <Footer />
   </main>
 </Layout>

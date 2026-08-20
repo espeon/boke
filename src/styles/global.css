@@ -15,24 +15,6 @@
     "Courier New", monospace;
 }
 
-/*
-  The default border color has changed to `currentcolor` in Tailwind CSS v4,
-  so we've added these compatibility styles to make sure everything still
-  looks the same as it did with Tailwind CSS v3.
-
-  If we ever want to remove these styles, we need to add an explicit border
-  color utility to any element that depends on these defaults.
-*/
-@layer base {
-  *,
-  ::after,
-  ::before,
-  ::backdrop,
-  ::file-selector-button {
-    border-color: var(--color-gray-200, currentcolor);
-  }
-}
-
 @layer base {
   html.dark .astro-code,
   html.dark .astro-code span {
@@ -44,6 +26,7 @@
   }
 }
 
+/* Blog post content */
 @layer components {
   @reference tailwindcss/utilities;
 
@@ -232,9 +215,6 @@
 
 @media (min-width: 1900px) {
   body.margin-notes-shown article:has(.margin-note) {
-    /* only avoid the TOC if there are margin notes in the article
-       * toc clears at sizes > 1920px
-       */
     margin-left: 0px !important;
   }
   article {
@@ -306,89 +286,4 @@ html.dark .margin-note-marker.flash {
   100% {
     background-color: transparent;
   }
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slideUpFade {
-  from {
-    opacity: 0;
-    transform: translateY(16px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Layout states */
-.centered-layout {
-  @apply flex min-h-screen flex-col items-stretch justify-center;
-}
-.default-layout {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: stretch;
-}
-
-/* View Transition Animations */
-@keyframes slide-up {
-  from {
-    opacity: 0;
-    filter: blur(4px);
-  }
-  to {
-    opacity: 1;
-    filter: blur(0px);
-  }
-}
-@keyframes slide-down {
-  from {
-    opacity: 1;
-    filter: blur(0px);
-  }
-  to {
-    opacity: 0;
-    filter: blur(4px);
-  }
-}
-/* Astro View Transitions API hooks */
-::view-transition-old(page-container) {
-  animation: slide-down 0.25s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-}
-::view-transition-new(page-container) {
-  animation: slide-up 0.25s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-}
-
-@keyframes springBounce {
-  0% {
-    transform: rotate(0deg);
-    opacity: 0;
-  }
-  20% {
-    transform: rotate(-10deg);
-    opacity: 1;
-  }
-  50% {
-    transform: rotate(20deg);
-  }
-  100% {
-    transform: rotate(0deg);
-    opacity: 1;
-  }
-}
-
-.springy-enter {
-  animation: springBounce 2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }

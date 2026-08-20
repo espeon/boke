@@ -1,48 +1,8 @@
 ---
-import { IconRow } from "../components/home/icon-row";
-import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout title={SITE_TITLE} description={SITE_DESCRIPTION}>
-  <main class="flex w-full flex-col items-start space-y-1 md:pt-2">
-    <div class="mb-4">
-      <img
-        src="/face.png"
-        class="springy-enter mb-4 h-32 w-32 -rotate-30 rounded-full"
-      />
-      <h2 class="origin-left text-3xl">Natalie B.</h2>
-      <p class="text-lg dark:text-neutral-300">
-        Making stuff for the web and beyond.
-      </p>
-    </div>
-
-    <div class="prose dark:prose-invert">
-      <p>
-        Currently at <a href="https://stream.place/">Streamplace</a>, helping
-        make live video easy and open for everyone, forever.
-      </p>
-      <p>
-        I'm a full-stack developer interested in web and audiovisual media. Also
-        building <a href="https://teal.fm">teal.fm</a> with <a
-          href="https://mmatt.net">Matt</a
-        >
-        for beautiful music tracking, and in the past I've made <a
-          href="https://github.com/espeon/muse">muse</a
-        >, which is a local music streaming platform.
-      </p>
-    </div>
-    <div>
-      <p>You can find me elsewhere here:</p>
-      <IconRow smaller />
-    </div>
-  </main>
+  <!-- Your homepage goes here -->
 </Layout>
-
-<style>
-  @reference "../styles/global.css";
-
-  .prose a {
-    @apply border-b-sky-800 underline dark:border-b-sky-200;
-  }
-</style>
