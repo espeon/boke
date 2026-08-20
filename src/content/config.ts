@@ -8,12 +8,6 @@ const posts = defineCollection({
     date: z.coerce.date(),
     image: z.string().optional(),
     draft: z.boolean().default(false),
-    bsky: z
-      .object({
-        did: z.string(),
-        postCid: z.string(),
-      })
-      .optional(),
   }),
 });
 

@@ -1,6 +1,5 @@
 ---
 import { type CollectionEntry } from "astro:content";
-import BlueskyComments from "../components/bsky-comments.tsx";
 import Footer from "../components/Footer.astro";
 import TableOfContents from "../components/TableOfContents.tsx";
 import { formatDate } from "../lib/utils";
@@ -119,34 +118,8 @@ const readingMinutes = readingTime % 60;
         </article>
       </header>
 
-      <!-- Comments Section -->
-      {
-        post.data.bsky && (
-          <section class="mt-12 border-t border-neutral-200 pt-8 dark:border-neutral-800">
-            <h2 class="mb-2 text-2xl font-semibold" id="comments">
-              Comments, questions, concerns.
-            </h2>
-            <p class="mb-6 text-zinc-300">
-              Join the conversation
-              <a
-                href={`https://bsky.app/profile/${post.data.bsky.did}/post/${post.data.bsky.postCid}`}
-                class="text-blue-800 hover:underline dark:text-blue-300"
-              >
-                on Bluesky.
-              </a>
-            </p>
-            <BlueskyComments
-              did={post.data.bsky.did}
-              postCid={post.data.bsky.postCid}
-              skipFirst={true}
-              client:load
-            />
-          </section>
-        )
-      }
-
       <!-- Table of Contents Sidebar -->
-      <TableOfContents client:load hasComments={!!post.data.bsky} />
+      <TableOfContents client:load />
     </main>
   </div>
 

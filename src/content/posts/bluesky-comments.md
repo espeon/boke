@@ -2,9 +2,6 @@
 title: "Building Bluesky Comments for My Blog"
 description: "I hate disqus too much."
 date: "Aug 6 2025"
-bsky:
-  did: "natalie.sh"
-  postCid: "3lvpmtclfz22r"
 ---
 
 ## The Comment System Problem

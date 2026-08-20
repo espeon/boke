@@ -49,21 +49,6 @@ const isHome = Astro.url.pathname === "/";
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
 
-    <!-- Font preloads -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Fustat:wght@200..800&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="preload"
-      href="/fonts/geist-mono-variable.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin
-    />
-
     <!-- Canonical URL -->
     <link rel="canonical" href={canonicalURL} />
 

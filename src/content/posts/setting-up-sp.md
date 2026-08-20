@@ -2,9 +2,6 @@
 title: "Setting up my own Streamplace server"
 description: "In and out, quick hour-long adventure, right?"
 date: "Jul 15 2025"
-bsky:
-  did: "natalie.sh"
-  postCid: "3lubhatnfws2k"
 ---
 
 ## Part 1: An Unexpected Journey

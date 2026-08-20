@@ -1,18 +1,10 @@
 ---
-import Ambilight from "../components/ambilight.astro";
 import { IconRow } from "../components/home/icon-row";
-import { LastFM } from "../components/home/lastfm.tsx";
-import { LastFmBackground } from "../components/lastfm-bg";
-import PersistWrapper from "../components/PersistWrapper.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout title={SITE_TITLE} description={SITE_DESCRIPTION}>
-  <Ambilight />
-  <PersistWrapper>
-    <LastFmBackground client:only useDefaultImages={false} />
-  </PersistWrapper>
   <main class="flex w-full flex-col items-start space-y-1 md:pt-2">
     <div class="mb-4">
       <img
@@ -39,9 +31,6 @@ import Layout from "../layouts/Layout.astro";
           href="https://github.com/espeon/muse">muse</a
         >, which is a local music streaming platform.
       </p>
-      <div class="max-w-full">
-        <LastFM client:load client:only />
-      </div>
     </div>
     <div>
       <p>You can find me elsewhere here:</p>
