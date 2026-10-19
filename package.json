@@ -24,6 +24,7 @@
     "astro": "^5.13.4",
     "clsx": "^2.1.1",
     "react": "^19.1.1",
+    "react-crossfade-simple": "^1.0.7",
     "react-dom": "^19.1.1",
     "tailwind-merge": "^2.6.0",
     "tailwindcss": "^4.1.11",

@@ -12,7 +12,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const { title, description, className } = Astro.props;
 ---
 
-<html lang="en">
+<html lang="en" class="bg-background text-foreground">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -35,6 +35,17 @@ const { title, description, className } = Astro.props;
     <meta name="twitter:description" content={description} />
 
     <script is:inline>
+      // anti-fouc (set to dark on .dark)
+      if (
+        localStorage.theme === "dark" ||
+        (!("theme" in localStorage) &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches)
+      ) {
+        document.documentElement.classList.add("dark");
+      }
+    </script>
+
+    <script is:inline>
       // Preserve anchor scrolling to margin-note/ref targets across navigation.
       if (
         window.location.hash.startsWith("#note-") ||
@@ -53,8 +64,43 @@ const { title, description, className } = Astro.props;
     </script>
   </head>
   <body class={className}>
-    <div class="mx-auto max-w-prose px-4 py-10">
+    <div class="mx-auto px-4 py-10">
       <slot />
     </div>
+    <svg width="0" height="0" overflow="visible">
+      <filter
+        id="ambilight"
+        x="-500%"
+        y="-500%"
+        width="2000%"
+        height="2000%"
+        color-interpolation-filters="sRGB"
+      >
+        <feOffset in="SourceGraphic" result="source-copy"></feOffset>
+        <feColorMatrix
+          in="source-copy"
+          type="saturate"
+          values="1.5"
+          result="saturated-copy"></feColorMatrix>
+        <feColorMatrix
+          in="saturated-copy"
+          type="matrix"
+          values="1 0 0 0 0
+                       0 1 0 0 0
+                       0 0 1 0 0
+                       33 33 33 201 -100"
+          result="bright-colors"></feColorMatrix>
+        <feMorphology
+          in="bright-colors"
+          operator="dilate"
+          radius="10"
+          result="spread"></feMorphology>
+        <feGaussianBlur in="spread" stdDeviation="83" result="ambilight-light"
+        ></feGaussianBlur>
+        <feOffset in="SourceGraphic" result="source"></feOffset>
+        <feComposite in="source" in2="ambilight-light" operator="over"
+        ></feComposite>
+      </filter>
+    </svg>
   </body>
 </html>

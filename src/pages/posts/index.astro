@@ -11,24 +11,24 @@ const posts = collection
 ---
 
 <Layout title={SITE_TITLE} description={SITE_DESCRIPTION}>
-  <main class="flex flex-1 flex-col">
-    <ul class="flex flex-col gap-1.5">
+  <main class="mx-auto flex w-full max-w-[40rem] flex-1 flex-col">
+    <ul class="flex flex-col">
       {
         posts.map((post) => (
           <li>
             <a
               href={`/posts/${post.slug}`}
-              class="group flex flex-col justify-between gap-1 pb-3"
+              class="group hover:bg-muted -mx-4 flex flex-col gap-1 rounded-lg px-4 py-3 transition-colors"
             >
-              <div class="flex flex-row items-center justify-between">
-                <div class="font-serif text-lg group-hover:underline">
+              <div class="flex flex-row items-baseline justify-between gap-4">
+                <div class="text-accent-foreground font-serif text-lg group-hover:underline">
                   {post.data.title}
                 </div>
-                <span class="text-nowrap text-zinc-500">
+                <span class="text-muted-foreground text-sm text-nowrap">
                   {formatDate(post.data.date)}
                 </span>
               </div>
-              <div class="text-neutral-400">{post.data.description}</div>
+              <div class="text-muted-foreground">{post.data.description}</div>
             </a>
           </li>
         ))
