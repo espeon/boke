@@ -1,7 +1,5 @@
 ---
 import { type CollectionEntry } from "astro:content";
-import BlueskyComments from "../components/bsky-comments.tsx";
-import Footer from "../components/Footer.astro";
 import TableOfContents from "../components/TableOfContents.tsx";
 import { formatDate } from "../lib/utils";
 import Layout from "./Layout.astro";
@@ -27,8 +25,6 @@ const readingMinutes = readingTime % 60;
 <Layout
   title={post.data.title}
   description={post.data.description}
-  image={post.data.image}
-  date={post.data.date}
   className="blog-post-layout"
 >
   <div class="blog-post-container mb-32">
@@ -39,7 +35,7 @@ const readingMinutes = readingTime % 60;
           {post.data.title}
           {
             post.data.draft && (
-              <p class="mt-1.5 mb-1 flex h-min flex-row items-center justify-center gap-2 rounded-full border border-neutral-400/50 bg-neutral-800 px-2 align-middle text-base font-semibold text-pink-600">
+              <p class="border-border bg-card text-destructive mt-1.5 mb-1 flex h-min flex-row items-center justify-center gap-2 rounded-full border px-2 align-middle text-base font-semibold">
                 {" "}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -67,13 +63,13 @@ const readingMinutes = readingTime % 60;
         </h1>
         {
           post.data.description && (
-            <p class="mb-1 font-medium text-zinc-500">
+            <p class="text-muted-foreground mb-1 font-medium">
               {post.data.description}
             </p>
           )
         }
         <p
-          class="mb-8 flex flex-wrap items-center gap-2 font-medium text-zinc-500"
+          class="text-muted-foreground mb-8 flex flex-wrap items-center gap-2 font-medium"
         >
           <span>{formatDate(post.data.date)}</span>
           <span class="px-1 font-black">·</span>
@@ -85,7 +81,7 @@ const readingMinutes = readingTime % 60;
               <button
                 type="button"
                 id="margin-notes-toggle"
-                class="ml-2 inline-flex items-center gap-1.5 rounded-md border border-zinc-300 px-2 py-0.5 text-xs font-medium text-zinc-600 transition-colors hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-400 dark:hover:bg-zinc-800/50"
+                class="border-border text-muted-foreground hover:bg-accent hover:text-foreground ml-2 inline-flex items-center gap-1.5 rounded-md border px-2 py-0.5 text-xs font-medium transition-colors"
                 aria-pressed="false"
                 aria-label="Toggle margin notes"
               >
@@ -114,147 +110,39 @@ const readingMinutes = readingTime % 60;
           }
         </p>
 
-        <article class="prose prose-zinc dark:prose-invert max-w-none">
+        <article class="typeset max-w-none">
           <Content />
         </article>
       </header>
 
-      <!-- Comments Section -->
-      {
-        post.data.bsky && (
-          <section class="mt-12 border-t border-neutral-200 pt-8 dark:border-neutral-800">
-            <h2 class="mb-2 text-2xl font-semibold" id="comments">
-              Comments, questions, concerns.
-            </h2>
-            <p class="mb-6 text-zinc-300">
-              Join the conversation
-              <a
-                href={`https://bsky.app/profile/${post.data.bsky.did}/post/${post.data.bsky.postCid}`}
-                class="text-blue-800 hover:underline dark:text-blue-300"
-              >
-                on Bluesky.
-              </a>
-            </p>
-            <BlueskyComments
-              did={post.data.bsky.did}
-              postCid={post.data.bsky.postCid}
-              skipFirst={true}
-              client:load
-            />
-          </section>
-        )
-      }
-
       <!-- Table of Contents Sidebar -->
-      <TableOfContents client:load hasComments={!!post.data.bsky} />
+      <TableOfContents client:load />
     </main>
   </div>
 
   <style>
+    /* Single centred reading column. The table of contents is fixed-position,
+       so it sits outside this flow. */
     .blog-post-container {
       position: relative;
+      max-width: 40rem;
+      margin-inline: auto;
     }
 
-    /* TOC positioning */
+    /* Table of contents sidebar. The component only renders this on wide
+       viewports; below that it falls back to the sticky bar. */
     :global(.table-of-contents) {
-      display: none;
-    }
-
-    /* Show TOC on larger screens - floating to the right */
-    @media (min-width: 1024px) {
-      :global(.table-of-contents) {
-        display: block;
-        position: fixed;
-        right: 1rem;
-        left: auto;
-        top: 10%;
-        width: 250px;
-        max-height: calc(100vh - 4rem);
-        overflow-y: auto;
-        z-index: 10;
-        opacity: 1;
-      }
-    }
-
-    /* Wider screens - move TOC further right */
-    @media (min-width: 1280px) {
-      :global(.table-of-contents) {
-        right: 1rem;
-        width: 280px;
-      }
-    }
-
-    /* Extra wide screens - more space */
-    @media (min-width: 1650px) {
-      :global(.table-of-contents) {
-        right: 4rem;
-        width: 300px;
-      }
-    }
-
-    /* Style the prose content */
-    .prose {
-      font-size: 1.1rem;
-      line-height: 1.7;
-    }
-
-    .prose h1,
-    .prose h2,
-    .prose h3,
-    .prose h4,
-    .prose h5,
-    .prose h6 {
-      scroll-margin-top: 2rem;
-    }
-
-    .prose h2 {
-      margin-top: 2.5rem;
-      margin-bottom: 1rem;
-    }
-
-    .prose h3 {
-      margin-top: 2rem;
-      margin-bottom: 0.75rem;
-    }
-
-    .prose p {
-      margin-bottom: 1.5rem;
-    }
-
-    /* Mobile TOC - show as collapsible at top */
-    @media (max-width: 1023px) {
-      :global(.table-of-contents) {
-        display: block;
-        position: static;
-        width: 100%;
-        max-height: 200px;
-        margin-bottom: 2rem;
-        padding: 1rem;
-        background: rgba(255, 255, 255, 0.8);
-        border: 1px solid rgba(228, 228, 231, 0.5);
-        border-radius: 0.5rem;
-        backdrop-filter: blur(10px);
-        transform: none;
-        box-shadow: none;
-      }
-
-      :global(.dark .table-of-contents) {
-        background: rgba(39, 39, 42, 0.8);
-        border-color: rgba(63, 63, 70, 0.5);
-      }
-    }
-
-    /* Fade-in animation for desktop TOC */
-    @keyframes fadeInTOC {
-      from {
-        opacity: 0;
-      }
-      to {
-        opacity: 1;
-      }
+      position: fixed;
+      top: 0;
+      right: 1.5rem;
+      left: auto;
+      width: 260px;
+      height: 100vh;
+      max-height: 100vh;
+      overflow-y: auto;
+      z-index: 10;
     }
   </style>
-  <Footer />
   <script>
     const STORAGE_KEY = "margin-notes-shown";
 
@@ -282,34 +170,40 @@ const readingMinutes = readingTime % 60;
     }
 
     function setupToggle() {
-      document.addEventListener("click", (event) => {
-        const target = event.target as Element | null;
-        const button = target?.closest("#margin-notes-toggle");
-        if (button) {
-          const currentlyShown =
-            document.body.classList.contains("margin-notes-shown");
-          localStorage.setItem(STORAGE_KEY, String(!currentlyShown));
-          applyMarginNotesState();
-          return;
-        }
-        const noteLink = target?.closest("a[href^='#note-'], a[href^='#ref-']");
-        if (noteLink) {
-          event.preventDefault();
-          const href = noteLink.getAttribute("href");
-          const el = href && document.getElementById(href.slice(1));
-          if (el) {
-            const shown =
+      document.addEventListener(
+        "click",
+        (event) => {
+          const target = event.target as Element | null;
+          const button = target?.closest("#margin-notes-toggle");
+          if (button) {
+            const currentlyShown =
               document.body.classList.contains("margin-notes-shown");
-            // Collapsed mode: tapping a reference opens/closes its note.
-            if (!shown && href.startsWith("#note-")) {
-              if (!el.classList.toggle("open")) return;
-            }
-            el.classList.remove("flash");
-            void el.offsetWidth; // force reflow so the animation can restart
-            el.classList.add("flash");
+            localStorage.setItem(STORAGE_KEY, String(!currentlyShown));
+            applyMarginNotesState();
+            return;
           }
-        }
-      }, true);
+          const noteLink = target?.closest(
+            "a[href^='#note-'], a[href^='#ref-']",
+          );
+          if (noteLink) {
+            event.preventDefault();
+            const href = noteLink.getAttribute("href");
+            const el = href && document.getElementById(href.slice(1));
+            if (el) {
+              const shown =
+                document.body.classList.contains("margin-notes-shown");
+              // Collapsed mode: tapping a reference opens/closes its note.
+              if (!shown && href.startsWith("#note-")) {
+                if (!el.classList.toggle("open")) return;
+              }
+              el.classList.remove("flash");
+              void el.offsetWidth; // force reflow so the animation can restart
+              el.classList.add("flash");
+            }
+          }
+        },
+        true,
+      );
     }
 
     applyMarginNotesState();

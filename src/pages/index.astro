@@ -1,59 +1,103 @@
 ---
-import Ambilight from "../components/ambilight.astro";
-import { IconRow } from "../components/home/icon-row";
-import { LastFM } from "../components/home/lastfm.tsx";
-import { LastFmBackground } from "../components/lastfm-bg";
-import PersistWrapper from "../components/PersistWrapper.astro";
+import { LastFM } from "../components/lastfm";
+import ThemeSwitcher from "../components/ThemeSwitcher.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 import Layout from "../layouts/Layout.astro";
+
+import HomeLink from "../components/HomeLink.astro";
+
+import { getCollection } from "astro:content";
+
+const collection = await getCollection("posts");
+const posts = collection
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .filter((post) => post.data.draft !== true);
 ---
 
 <Layout title={SITE_TITLE} description={SITE_DESCRIPTION}>
-  <Ambilight />
-  <PersistWrapper>
-    <LastFmBackground client:only useDefaultImages={false} />
-  </PersistWrapper>
-  <main class="flex w-full flex-col items-start space-y-1 md:pt-2">
-    <div class="mb-4">
-      <img
-        src="/face.png"
-        class="springy-enter mb-4 h-32 w-32 -rotate-30 rounded-full"
-      />
-      <h2 class="origin-left text-3xl">Natalie B.</h2>
-      <p class="text-lg dark:text-neutral-300">
-        Making stuff for the web and beyond.
-      </p>
+  <div class="mx-auto grid max-w-screen-lg grid-cols-1 gap-6 md:grid-cols-12">
+    <div class="typeset col-span-2 flex min-w-full flex-col">
+      <div
+        class="mt-7.25 flex w-full flex-row items-end justify-between gap-2 md:ml-auto"
+      >
+        <ThemeSwitcher />
+        <p class="font-serif">Natalie B.</p>
+      </div>
     </div>
-
-    <div class="prose dark:prose-invert">
-      <p>
-        Currently at <a href="https://stream.place/">Streamplace</a>, helping
-        make live video easy and open for everyone, forever.
-      </p>
-      <p>
-        I'm a full-stack developer interested in web and audiovisual media. Also
-        building <a href="https://teal.fm">teal.fm</a> with <a
-          href="https://mmatt.net">Matt</a
-        >
-        for beautiful music tracking, and in the past I've made <a
-          href="https://github.com/espeon/muse">muse</a
-        >, which is a local music streaming platform.
-      </p>
+    <div class="col-span-8 min-w-full rounded-lg md:mt-12">
+      <div class="typeset">
+        <p>is <i>thinking through things</i>.</p>
+        <p>
+          Building great software and multimedia web experiences, and a big fan
+          of open social. <br />Currently at <a
+            href="https://stream.place"
+            target="_blank"
+            rel="noopener noreferrer">Streamplace</a
+          >.
+        </p>
+        <p>
+          Previously, I've helped out at the <a
+            href="https://atmosphere.community"
+            target="_blank"
+            rel="noopener noreferrer">Atmosphere Community</a
+          > org, and worked on various open-source projects, such as <a
+            href="https://teal.fm"
+            target="_blank"
+            rel="noopener noreferrer">teal.fm</a
+          >.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div
+    class="mx-auto mt-8 grid max-w-screen-lg grid-cols-1 gap-6 md:grid-cols-12"
+  >
+    <div class="col-span-2 flex min-w-full flex-col">
+      <div class="flex flex-row items-end gap-2 md:ml-auto">
+        <p class="font-serif">Selected works</p>
+      </div>
+    </div>
+    <div class="col-span-8 min-w-full rounded-lg">
+      <div class="space-y-2">
+        <HomeLink
+          href="https://teal.fm"
+          text="teal.fm"
+          description="Music tracking made for open social. Decentralized, if you prefer."
+        />
+        <HomeLink
+          href="https://github.com/espeon/muse"
+          text="Muse"
+          description="A self-hosted music streaming service. Focusing on UX that rivals the best, with a focus on speed and efficient audio delivery."
+        />
+        <HomeLink
+          href="https://spwn.run"
+          text="spwn.run"
+          description="Turn some linux servers into your own developer cloud, with persistent Firecracker microVMs, pooled resources, SSH access, and automatic web routing."
+        />
+      </div>
+    </div>
+  </div>
+  <div
+    class="mx-auto mt-8 grid max-w-screen-lg grid-cols-1 gap-6 md:grid-cols-12"
+  >
+    <div class="col-span-2 flex min-w-full flex-col">
+      <div class="flex flex-row items-end gap-2 md:ml-auto">
+        <p class="font-serif">Now</p>
+      </div>
+    </div>
+  </div>
+  <div
+    class="mx-auto mt-2 grid max-w-screen-lg grid-cols-1 gap-6 md:grid-cols-12"
+  >
+    <div class="col-span-2 flex min-w-full flex-col">
+      <div class="flex flex-row items-end gap-2 md:ml-auto">
+        <p class="text-muted-foreground font-serif">Listening</p>
+      </div>
+    </div>
+    <div class="col-span-8 min-w-full rounded-lg">
       <div class="max-w-full">
         <LastFM client:load client:only />
       </div>
     </div>
-    <div>
-      <p>You can find me elsewhere here:</p>
-      <IconRow smaller />
-    </div>
-  </main>
+  </div>
 </Layout>
-
-<style>
-  @reference "../styles/global.css";
-
-  .prose a {
-    @apply border-b-sky-800 underline dark:border-b-sky-200;
-  }
-</style>

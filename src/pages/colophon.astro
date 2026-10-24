@@ -1,0 +1,82 @@
+---
+import ThemeSwitcher from "../components/ThemeSwitcher.astro";
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout
+  title="Colophon"
+  description="Technical stack, typography, and colors used on this site"
+>
+  <div
+    class="mx-auto mt-8 grid max-w-screen-lg grid-cols-1 gap-6 md:grid-cols-12"
+  >
+    <div class="typeset col-span-2 flex min-w-full flex-col">
+      <div
+        class="flex w-full flex-row items-end justify-around gap-2 md:ml-auto"
+      >
+        <ThemeSwitcher />
+        <p class="font-serif">Colophon</p>
+      </div>
+    </div>
+  </div>
+  <div
+    class="mx-auto mt-4 grid max-w-screen-lg grid-cols-1 gap-6 md:grid-cols-12"
+  >
+    <div class="col-span-2 flex min-w-full flex-col">
+      <div class="flex flex-row items-end gap-2 md:ml-auto">
+        <p class="text-muted-foreground font-serif">Tech</p>
+      </div>
+    </div>
+    <div class="col-span-8 min-w-full rounded-lg">
+      <div class="max-w-full">
+        <p class="typeset">
+          I like to use Astro for most things, especially more static sites and
+          blogs, and this is no exception. I've learned web tech primarily with
+          React, and I think Astro, while not React, is familiar and comfortable
+          to me.<br /> For similar reasons, I like to use TailwindCSS (it's nice
+          to have css-in-code without the overhead of something like styled components).
+        </p>
+      </div>
+    </div>
+  </div>
+  <div
+    class="mx-auto mt-4 grid max-w-screen-lg grid-cols-1 gap-6 md:grid-cols-12"
+  >
+    <div class="col-span-2 flex min-w-full flex-col">
+      <div class="flex flex-row items-end gap-2 md:ml-auto">
+        <p class="text-muted-foreground font-serif">Typography</p>
+      </div>
+    </div>
+    <div class="col-span-8 min-w-full rounded-lg">
+      <div class="max-w-full">
+        <p class="typeset">
+          Currently, this site is typed in Mi Sans and Sentient. Mi Sans is a
+          font Xiaomi made for their MiOS operating system they use on their
+          devices. I find that it works well for general body text, while
+          looking a bit more expressive. Sentient is used for headings and
+          display text. It's a distinctive, humanistic, and modern serif, much
+          like Labor and Wait's <i>Copernicus</i>.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div
+    class="mx-auto mt-4 grid max-w-screen-lg grid-cols-1 gap-6 md:grid-cols-12"
+  >
+    <div class="col-span-2 flex min-w-full flex-col">
+      <div class="flex flex-row items-end gap-2 md:ml-auto">
+        <p class="text-muted-foreground font-serif">Colors</p>
+      </div>
+    </div>
+    <div class="col-span-8 min-w-full rounded-lg">
+      <div class="max-w-full">
+        <p class="typeset">
+          This site uses a theme based off Rosé Pine. The color palette features
+          soft, muted tones inspired by the natural world, with gentler
+          contrasts for readability. I like the slight pink tint of the whole
+          theme, it reads to me as more inviting.
+        </p>
+      </div>
+    </div>
+  </div>
+</Layout>

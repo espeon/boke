@@ -1,71 +1,186 @@
-@font-face {
-  font-family: "TL Infinite Loop";
-  src: url(/fonts/TLInfiniteLoop-Regular.otf) format("opentype");
-}
-@font-face {
-  font-family: "TASA Orbiter Variable";
-  src: url(/fonts/TASAOrbiter.ttf) format("truetype");
-}
-@font-face {
-  font-family: "Valley Sans";
-  src: url("/fonts/ValleySans[wght].woff2") format("woff2");
-  weight: 100 900;
-}
-
-@font-face {
-  font-family: "Valley Sans";
-  src: url("/fonts/ValleySans-Italic[wght].woff2") format("woff2");
-  font-style: italic;
-  weight: 100 900;
-}
-
-@import url("https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,200..800;1,200..800&display=swap");
-
 @import "tailwindcss";
-
-@plugin "@tailwindcss/typography";
+@import "./typeset.css";
 
 @custom-variant dark (&:is(.dark *));
 
+@font-face {
+  font-family: "Mi Sans";
+  src: url("/fonts/MiSansLatinVF.ttf") format("truetype");
+  font-weight: 100 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Sentient";
+  src:
+    url("/fonts/Sentient-Variable.woff2") format("woff2"),
+    url("/fonts/Sentient-Variable.woff") format("woff"),
+    url("/fonts/Sentient-Variable.ttf") format("truetype");
+  font-weight: 200 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Sentient";
+  src:
+    url("/fonts/Sentient-VariableItalic.woff2") format("woff2"),
+    url("/fonts/Sentient-VariableItalic.woff") format("woff"),
+    url("/fonts/Sentient-VariableItalic.ttf") format("truetype");
+  font-weight: 200 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Light palette */
+:root {
+  --background: #faf4ed;
+  --foreground: #575279;
+  --card: #fffaf3;
+  --card-foreground: #575279;
+  --popover: #f2e9e1;
+  --popover-foreground: #575279;
+  --primary: #575279;
+  --primary-foreground: #faf4ed;
+  --secondary: #dfdad9;
+  --secondary-foreground: #575279;
+  --muted: #f4ede8;
+  --muted-foreground: #797593;
+  --accent: #f2e9e1;
+  --accent-foreground: #575279;
+  --destructive: #b4637a;
+  --destructive-foreground: #faf4ed;
+  --border: #cecacd;
+  --input: #dfdad9;
+  --ring: #907aa9;
+  --sidebar: #fffaf3;
+  --sidebar-foreground: #575279;
+  --sidebar-primary: #907aa9;
+  --sidebar-primary-foreground: #faf4ed;
+  --sidebar-accent: #f2e9e1;
+  --sidebar-accent-foreground: #575279;
+  --sidebar-border: #dfdad9;
+  --sidebar-ring: #907aa9;
+
+  /* Chart series */
+  --chart-1: #ea9d34;
+  --chart-2: #b4637a;
+  --chart-3: #286983;
+  --chart-4: #56949f;
+  --chart-5: #907aa9;
+
+  /* Shadow */
+  --shadow-color: #000000;
+  --shadow-opacity: 0.12;
+  --shadow-blur: 2px;
+  --shadow-spread: 0px;
+  --shadow-offset-x: 0px;
+  --shadow-offset-y: 1px;
+}
+
+/* Dark palette */
+.dark {
+  --background: #191724;
+  --foreground: #e0def4;
+  --card: #1f1d2e;
+  --card-foreground: #e0def4;
+  --popover: #26233a;
+  --popover-foreground: #e0def4;
+  --primary: #e0def4;
+  --primary-foreground: #191724;
+  --secondary: #403d52;
+  --secondary-foreground: #e0def4;
+  --muted: #21202e;
+  --muted-foreground: #908caa;
+  --accent: #26233a;
+  --accent-foreground: #e0def4;
+  --destructive: #eb6f92;
+  --destructive-foreground: #191724;
+  --border: #403d52;
+  --input: #524f67;
+  --ring: #c4a7e7;
+  --sidebar: #1f1d2e;
+  --sidebar-foreground: #e0def4;
+  --sidebar-primary: #c4a7e7;
+  --sidebar-primary-foreground: #191724;
+  --sidebar-accent: #26233a;
+  --sidebar-accent-foreground: #e0def4;
+  --sidebar-border: #403d52;
+  --sidebar-ring: #c4a7e7;
+
+  /* Chart series */
+  --chart-1: #f6c177;
+  --chart-2: #eb6f92;
+  --chart-3: #31748f;
+  --chart-4: #9ccfd8;
+  --chart-5: #c4a7e7;
+
+  /* Shadow */
+  --shadow-color: #000000;
+  --shadow-opacity: 0.18;
+  --shadow-blur: 2px;
+  --shadow-spread: 0px;
+  --shadow-offset-x: 0px;
+  --shadow-offset-y: 1px;
+}
+
+/* Map the raw palette variables into Tailwind's color namespace.
+   `inline` keeps the `var(--x)` references so utilities react to `.dark`. */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+}
+
+/* Static tokens: fonts and spacing. These don't switch with `.dark`,
+   so they don't need placeholder vars in `:root`, and they're declared
+   here as plain values (not `inline`) so Tailwind resolves them upfront. */
 @theme {
   --font-sans:
-    "Atkinson Hyperlegible Next", ui-sans-serif, system-ui, sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --font-display:
-    "Valley Sans", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+    "Mi Sans", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
     "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --font-serif:
-    "TL Infinite Loop", ui-serif, Georgia, Cambria, "Times New Roman", Times,
-    serif;
+  --font-display: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji";
+  --font-serif: "Sentient", "Wollstonecraft Romance", Georgia, serif;
   --font-mono:
-    "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-    "Liberation Mono", "Courier New", monospace;
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace;
+  --radius-md: 0.5rem;
 }
 
-/*
-  The default border color has changed to `currentcolor` in Tailwind CSS v4,
-  so we've added these compatibility styles to make sure everything still
-  looks the same as it did with Tailwind CSS v3.
-
-  If we ever want to remove these styles, we need to add an explicit border
-  color utility to any element that depends on these defaults.
-*/
+/* ---------------------------------------------------------------
+   Base
+   --------------------------------------------------------------- */
 @layer base {
-  *,
-  ::after,
-  ::before,
-  ::backdrop,
-  ::file-selector-button {
-    border-color: var(--color-gray-200, currentcolor);
-  }
-}
-
-@layer base {
-  @font-face {
-    font-family: "Geist Mono";
-    src: url("/fonts/geist-mono-variable.woff2") format("woff2");
-    font-display: swap;
-  }
   html.dark .astro-code,
   html.dark .astro-code span {
     color: var(--shiki-dark) !important;
@@ -76,159 +191,12 @@
   }
 }
 
-@layer components {
-  @reference tailwindcss/utilities;
-
-  article {
-    p {
-      @apply my-4 leading-relaxed;
-    }
-    h1 {
-      @apply font-display my-4 text-xl font-medium dark:text-white;
-    }
-    h2 {
-      @apply font-display my-4 text-lg font-medium dark:text-white;
-    }
-    h3,
-    h4,
-    h5,
-    h6 {
-      @apply font-display my-4 font-medium dark:text-white;
-    }
-    :not(pre) > code {
-      @apply rounded-sm border bg-zinc-200/50 px-1 py-0.5 font-mono text-sm font-medium text-black dark:border-zinc-700 dark:bg-zinc-800/50 dark:text-white;
-    }
-    pre:has(code) {
-      @apply my-4 max-h-[600px] overflow-auto rounded-lg border p-4 font-mono text-sm font-medium dark:border-zinc-700;
-    }
-    img {
-      @apply my-4 rounded-lg border dark:border-zinc-700;
-    }
-    video {
-      @apply my-4 rounded-lg border dark:border-zinc-700;
-    }
-    blockquote {
-      @apply my-4 border-l-2 pl-4;
-    }
-    .callout {
-      @apply my-6 rounded-md border text-sm;
-      padding: 0;
-    }
-    .callout-title {
-      @apply flex items-center gap-2 rounded-t-md border-b px-4 py-2 font-medium;
-    }
-    .callout-title::before {
-      content: "";
-      display: inline-block;
-      width: 0.5rem;
-      height: 0.5rem;
-      border-radius: 9999px;
-      background: currentColor;
-      flex-shrink: 0;
-    }
-    .callout-content {
-      @apply px-4 [&>p]:my-2 [&>p:first-child]:mt-0 [&>p:last-child]:mb-0;
-    }
-    .callout[data-type="note"] {
-      @apply border-zinc-300 bg-zinc-100/60 text-zinc-800 dark:border-zinc-700 dark:bg-zinc-900/60 dark:text-zinc-200;
-    }
-    .callout[data-type="note"] .callout-title {
-      @apply border-zinc-300 text-zinc-700 dark:border-zinc-700 dark:text-zinc-300;
-    }
-    .callout[data-type="tip"],
-    .callout[data-type="important"] {
-      @apply border-emerald-300 bg-emerald-50/60 text-emerald-900 dark:border-emerald-800/60 dark:bg-emerald-950/30 dark:text-emerald-200;
-    }
-    .callout[data-type="tip"] .callout-title,
-    .callout[data-type="important"] .callout-title {
-      @apply border-emerald-300 text-emerald-700 dark:border-emerald-800/60 dark:text-emerald-300;
-    }
-    .callout[data-type="info"] {
-      @apply border-sky-300 bg-sky-50/60 text-sky-900 dark:border-sky-800/60 dark:bg-sky-950/30 dark:text-sky-200;
-    }
-    .callout[data-type="info"] .callout-title {
-      @apply border-sky-300 text-sky-700 dark:border-sky-800/60 dark:text-sky-300;
-    }
-    .callout[data-type="warning"],
-    .callout[data-type="caution"] {
-      @apply border-amber-300 bg-amber-50/60 text-amber-900 dark:border-amber-800/60 dark:bg-amber-950/30 dark:text-amber-200;
-    }
-    .callout[data-type="warning"] .callout-title,
-    .callout[data-type="caution"] .callout-title {
-      @apply border-amber-300 text-amber-700 dark:border-amber-800/60 dark:text-amber-300;
-    }
-    .callout[data-type="danger"] {
-      @apply border-red-300 bg-red-50/60 text-red-900 dark:border-red-800/60 dark:bg-red-950/30 dark:text-red-200;
-    }
-    .callout[data-type="danger"] .callout-title {
-      @apply border-red-300 text-red-700 dark:border-red-800/60 dark:text-red-300;
-    }
-    .margin-note-marker {
-      @apply no-underline;
-    }
-    .margin-note-marker sup {
-      @apply text-[0.7em];
-    }
-    .margin-note-id-marker {
-      @apply mr-1 font-medium text-blue-500;
-    }
-    .margin-note-id-marker sup {
-      @apply text-[0.7em];
-    }
-    .margin-note-block {
-      @apply my-4 flex flex-col;
-    }
-    .margin-note-block > :not(.margin-note) {
-      margin: 0;
-      order: -1;
-    }
-    .margin-note {
-      @apply my-3 rounded-md border-l-2 border-zinc-300 bg-zinc-100/50 px-3 py-2 text-sm leading-snug text-zinc-700 dark:border-zinc-700 dark:bg-zinc-900/50 dark:text-zinc-300;
-    }
-    .margin-note p {
-      @apply m-0;
-    }
-    .margin-note a {
-      @apply text-blue-500 underline;
-    }
-    .margin-note-backref {
-      @apply ml-1 inline-flex align-middle no-underline opacity-60 transition-opacity hover:opacity-100;
-    }
-    .margin-note-backref svg {
-      width: 0.9em;
-      height: 0.9em;
-    }
-    .callout p {
-      @apply py-0;
-    }
-    a {
-      @apply text-blue-500 underline;
-    }
-    table {
-      @apply my-4 w-full table-auto border-collapse text-sm;
-      th {
-        @apply border-b p-4 text-left font-medium dark:border-zinc-700;
-      }
-      td {
-        @apply border-b bg-zinc-50 p-4 dark:border-zinc-700 dark:bg-zinc-800;
-      }
-    }
-    ol {
-      @apply my-1 list-decimal space-y-1 [&_ol]:pl-5 [&_ul]:pl-5;
-    }
-    ul {
-      @apply my-1 list-disc space-y-1 [&_ol]:pl-5 [&_ul]:pl-5;
-    }
-    kbd {
-      @apply rounded-sm border border-b-2 bg-zinc-100 px-1 py-0.5 font-mono text-xs font-medium text-black dark:border-zinc-700 dark:bg-zinc-800 dark:text-white;
-    }
-    mark {
-      @apply dark:bg-yellow-500/50 dark:text-white;
-    }
-  }
-}
-
+/* ---------------------------------------------------------------
+   Margin notes — floating layout on wide screens
+   --------------------------------------------------------------- */
 @media (min-width: 1536px) {
+  /* Narrows the article when the notes offset it below, so that offset shifts
+     the column left rather than widening it past the table of contents. */
   article {
     max-width: 640px;
     margin-left: auto;
@@ -250,10 +218,10 @@
     margin-bottom: 0.25rem;
     position: relative;
     background: transparent;
-    border-left: 2px solid var(--color-zinc-300);
+    border-left: 2px solid var(--color-border);
     border-radius: 0;
     padding: 0 0 0 0.75rem;
-    color: var(--color-zinc-500);
+    color: var(--color-muted-foreground);
     font-size: 0.85rem;
     line-height: 1.5;
   }
@@ -264,16 +232,7 @@
 
 @media (min-width: 1900px) {
   body.margin-notes-shown article:has(.margin-note) {
-    /* only avoid the TOC if there are margin notes in the article
-       * toc clears at sizes > 1920px
-       */
     margin-left: 0px !important;
-  }
-  article {
-    max-width: 640px;
-    margin-left: auto;
-    margin-right: auto;
-    padding-right: 0;
   }
   body.margin-notes-shown .margin-note {
     float: right;
@@ -284,10 +243,10 @@
     margin-bottom: 0.25rem;
     position: relative;
     background: transparent;
-    border-left: 2px solid var(--color-zinc-300);
+    border-left: 2px solid var(--color-border);
     border-radius: 0;
     padding: 0 0 0 0.75rem;
-    color: var(--color-zinc-500);
+    color: var(--color-muted-foreground);
     font-size: 0.85rem;
     line-height: 1.5;
   }
@@ -296,14 +255,10 @@
   }
 }
 
-@media (min-width: 1536px) {
-  html.dark body.margin-notes-shown .margin-note {
-    border-left-color: var(--color-zinc-700);
-    color: var(--color-zinc-300);
-  }
-}
-
-/* Collapsed mode (toggle off): notes hidden until their reference is tapped open. */
+/* ---------------------------------------------------------------
+   Margin notes — collapsed mode
+   Notes are hidden until their reference is tapped open.
+   --------------------------------------------------------------- */
 body:not(.margin-notes-shown) .margin-note {
   display: none;
 }
@@ -311,6 +266,7 @@ body:not(.margin-notes-shown) .margin-note.open {
   display: block;
 }
 
+/* Highlight a note when it's deep-linked or flash-focused */
 .margin-note:target,
 .margin-note.flash,
 :target.margin-note-marker,
@@ -340,104 +296,6 @@ html.dark .margin-note-marker.flash {
   }
 }
 
-@keyframes scrollText {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(calc(-1 * var(--text-width)));
-  }
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slideUpFade {
-  from {
-    opacity: 0;
-    transform: translateY(16px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animate-scroll-text {
-  animation: scrollText;
-}
-
 .ambilight {
   filter: url(#ambilight);
-}
-
-/* Layout states */
-.centered-layout {
-  @apply flex min-h-screen flex-col items-stretch justify-center;
-}
-.default-layout {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: stretch;
-}
-
-/* View Transition Animations */
-@keyframes slide-up {
-  from {
-    opacity: 0;
-    filter: blur(4px);
-  }
-  to {
-    opacity: 1;
-    filter: blur(0px);
-  }
-}
-@keyframes slide-down {
-  from {
-    opacity: 1;
-    filter: blur(0px);
-  }
-  to {
-    opacity: 0;
-    filter: blur(4px);
-  }
-}
-/* Astro View Transitions API hooks */
-::view-transition-old(page-container) {
-  animation: slide-down 0.25s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-}
-::view-transition-new(page-container) {
-  animation: slide-up 0.25s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-}
-
-@keyframes springBounce {
-  0% {
-    transform: rotate(0deg);
-    opacity: 0;
-  }
-  20% {
-    transform: rotate(-10deg);
-    opacity: 1;
-  }
-  50% {
-    transform: rotate(20deg);
-  }
-  100% {
-    transform: rotate(0deg);
-    opacity: 1;
-  }
-}
-
-.springy-enter {
-  animation: springBounce 2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
