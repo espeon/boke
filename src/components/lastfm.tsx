@@ -5,6 +5,9 @@ import { useLastFM } from "../hooks/useLastFm";
 export function LastFM() {
   const { data, error, loading } = useLastFM(10000);
 
+  if (loading || !data) return null;
+  if (error) return null;
+
   return (
     <CrossFade
       contentKey={
